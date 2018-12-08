@@ -22,36 +22,14 @@
 // Starting with a frequency of zero, what is the resulting frequency after all of the changes
 // in frequency have been applied?
 
-use std::io::BufReader;
-use std::io::BufRead;
-use std::fs::File;
-
-const STARTING_FREQUENCY: isize = 0;
-const FILE_PATH: &str = "src/Day 1/input.txt";
-
-fn main()
+pub fn run(starting_frequency: i32, input: &Vec<i32>) -> i32
 {
-    let mut freq = STARTING_FREQUENCY;
+    let mut frequency = starting_frequency;
 
-    let f = File::open(FILE_PATH).unwrap();
-    let file = BufReader::new(&f);
+    for value in input
+        {
+            frequency += value
+        }
 
-    for line in file.lines()
-    {
-        let l = line.unwrap();
-        let op: String = l.chars().take(1).collect();
-        let amount: String = l.chars().skip(1).take(l.chars().count() - 1).collect();
-        let amount = amount.parse::<isize>().unwrap();
-
-        if op == "+"
-            {
-                freq += amount;
-            }
-        else if op == "-"
-            {
-                freq -= amount;
-            }
-    }
-
-    println!("Your final frequency is {}.", freq)
+    frequency
 }

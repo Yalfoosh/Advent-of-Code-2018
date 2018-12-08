@@ -22,49 +22,31 @@
 // '+7, +7, -2, -7, -4' first reaches 14 twice.
 // What is the first frequency your device reaches twice?
 
-use std::io::BufReader;
-use std::io::BufRead;
-use std::fs::File;
+
 use std::collections::HashSet;
 
-const STARTING_FREQUENCY: isize = 0;
-const FILE_PATH: &str = "src/Day 1/input.txt";
-
-fn main()
+pub fn run(starting_frequency: i32, input: &Vec<i32>) -> i32
 {
-    let mut freq = STARTING_FREQUENCY;
-
+    let mut frequency = starting_frequency;
     let mut set = HashSet::new();
     let mut done = false;
 
-    set.insert(0);
-
     while !done
+    {
+        for value in input
         {
-            for line in BufReader::new(File::open(FILE_PATH).unwrap()).lines()
-                {
-                    let l = line.unwrap();
-                    let op: String = l.chars().take(1).collect();
-                    let amount: String = l.chars().skip(1).take(l.chars().count() - 1).collect();
-                    let amount = amount.parse::<isize>().unwrap();
-
-                    if op == "+"
-                        {
-                            freq += amount;
-                        }
-                        else if op == "-"
-                            {
-                                freq -= amount;
-                            }
-
-                    if set.contains(&freq)
-                        {
-                            done = true;
-                            break;
-                        }
-                        else { set.insert(freq); }
-                };
+            if set.contains(&frequency)
+            {
+                done = true;
+                break;
+            }
+            else
+            {
+                set.insert(frequency.clone());
+                frequency += value;
+            }
         }
+    }
 
-    println!("The first value to repeat is {}.", freq);
+    frequency
 }

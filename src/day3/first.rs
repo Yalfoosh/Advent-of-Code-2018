@@ -52,3 +52,59 @@ If the Elves all proceed with their own plans, none of them will have enough fab
 How many square inches of fabric are within two or more claims?
 */
 
+use std::collections::HashMap;
+
+pub fn run(input: &Vec<(usize, usize, usize, usize)>) -> (usize, HashMap<usize, HashMap<usize, usize>>)
+{
+    let mut map: HashMap<usize, HashMap<usize, usize>> = HashMap::new();
+
+    for entry in input { map = claim_fabric(map, entry); }
+
+    return (count_multiple_claims(&map), map);
+}
+
+/// Returns a modified version of the map given as an argument with a placed order (x, y, width, height)
+fn claim_fabric(map: HashMap<usize, HashMap<usize, usize>>, order: &(usize, usize, usize, usize)) -> HashMap<usize, HashMap<usize, usize>>
+{
+    // First we claim ownership of the map that we'll modify.
+    let mut modifying = map;
+
+    // For every square inch of width...
+    for x in 0..order.2
+        {
+            // We find the entry for that x coordinate + the current portion of width we're at,
+            // or if it doesn't exist, we insert a new HashMap for it.
+            let x_coordinated = modifying.entry(order.0 + x).or_insert(HashMap::new());
+
+            // For every square inch of height...
+            for y in 0..order.3
+                {
+                    // We find the entry for that y coordinate + the current portion of height we're at,
+                    // or if it doesn't exist, we insert a new usize in it, with value 0.
+                    let fully_coordinated = (*x_coordinated).entry(order.1 + y).or_insert(0);
+
+                    // Adding 1 to the HashMap entry is like claiming the square inch.
+                    *fully_coordinated += 1;
+                }
+        }
+
+    // Finally, we return the modified HashMap and give ownership to the caller.
+    return modifying;
+}
+
+/// Returns the number of square inches in the map given in arguments where fabric was claimed
+/// more than once.
+fn count_multiple_claims(map: &HashMap<usize, HashMap<usize, usize>>) -> usize
+{
+    let mut count = 0usize;
+
+    for x_coordinated in map.values()
+        {
+            for fully_coordinated in x_coordinated.values()
+                {
+                    if *fully_coordinated != 1usize { count += 1; }
+                }
+        }
+
+    return count;
+}

@@ -1,4 +1,4 @@
-pub const MAIN_DAY_MESSAGE: &str = "Enter the day number you want to run (or exit if you want to quit): ";
+pub const MAIN_DAY_MESSAGE: &str = "Enter the day number you want to run (or exit if you want to quit)";
 pub const MAIN_INVALID_INPUT_MESSAGE: &str = "The input is somehow invalid!";
 pub const MAIN_NO_DAY_1_MESSAGE: &str = "There is no Day 0 task!";
 pub const MAIN_DAY_NOT_IMPLEMENTED_MESSAGE: &str = "Day is not yet implemented!";
@@ -11,8 +11,8 @@ pub const CANT_FIX_FIRST_DIFFERENCE_MESSAGE: &str = "Function fix_first_differen
 
 
 
-pub const DAY1_STARTING_FREQUENCY: i32 = 0;
 pub const DAY1_INPUT_PATH: &str = "src/day1/input.txt";
+pub const DAY1_STARTING_FREQUENCY: i32 = 0;
 
 pub const DAY_1_SUM_TEXT: &str = "The sum of the input is";
 pub const DAY_1_SECOND_FREQUENCY_TEXT: &str = "The first frequency to appear twice is";
@@ -21,4 +21,15 @@ pub const DAY_1_SECOND_FREQUENCY_TEXT: &str = "The first frequency to appear twi
 pub const DAY2_INPUT_PATH: &str = "src/day2/input.txt";
 
 pub const DAY2_CHECKSUM_TEXT: &str = "The checksum is";
-pub const DAY2_COMMON_LETTERS_TEXT: &str = "The common letters from the 2 identical boxes are";
+pub const DAY2_COMMON_LETTERS_MESSAGE: &str = "The common letters from the 2 identical boxes are";
+
+
+pub const DAY3_INPUT_PATH: &str = "src/day3/input.txt";
+pub const DAY3_FIRST_SEPARATOR: &str = " @ ";
+pub const DAY3_COORDINATE_SIZE_SEPARATOR: &str = ": ";
+pub const DAY3_COORDINATE_SEPARATOR: &str = ",";
+pub const DAY3_SIZE_SEPARATOR: &str = "x";
+pub const DAY3_ORDER_NOT_FOUND_ERROR: &str = "No order was placed only once!";
+
+pub const DAY3_SQUARE_INCHES_MESSAGE: &str = "square inches were claimed more than once.";
+pub const DAY3_ID_NOT_TAKEN_MESSAGE: &str = "The order that was not taken more than once has the ID";

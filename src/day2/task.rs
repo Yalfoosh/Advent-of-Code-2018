@@ -21,7 +21,7 @@ fn get_input_vector(path: &str) -> Vec<String>
             Ok(value) => value,
             Err(_) =>
                 {
-                    match fs::read_to_string(Global::DAY2_INPUT_PATH.replace("src/", "./"))
+                    match fs::read_to_string(path.replace("src/", "./"))
                         {
                             Ok(value) => value,
                             Err(_) => panic!(Global::FILE_NOT_FOUND_PANIC_MESSAGE)
@@ -34,7 +34,7 @@ fn get_input_vector(path: &str) -> Vec<String>
 
     for line in input.lines() { input_vector.push(line.to_string()); }
 
-    return input_vector
+    return input_vector;
 }
 
 fn run_first(input: &Vec<String>)
@@ -44,5 +44,5 @@ fn run_first(input: &Vec<String>)
 
 fn run_second(input: &Vec<String>)
 {
-    println!("{}:\n{}.", Global::DAY2_COMMON_LETTERS_TEXT, second::run(input));
+    println!("{}:\n{}.", Global::DAY2_COMMON_LETTERS_MESSAGE, second::run(input));
 }

@@ -22,7 +22,7 @@ fn get_input_vector(path: &str) -> Vec<i32>
             Ok(value) => value,
             Err(_) =>
                 {
-                    match fs::read_to_string(Global::DAY1_INPUT_PATH.replace("src/", "./"))
+                    match fs::read_to_string(path.replace("src/", "./"))
                         {
                             Ok(value) => value,
                             Err(_) => panic!(Global::FILE_NOT_FOUND_PANIC_MESSAGE)

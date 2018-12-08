@@ -15,7 +15,7 @@ In the folder where your compiled binary exists, add folders for each day's inpu
 
 In it, unless specified below, should be a file containing your input named "input.txt". If the executable doesn't find the input.txt in the folder it's supposed to be for the day specified, it will simply crash.
 
-Specific format for input folder:
+## Specific format for input folder:
 
  - None so far.
 

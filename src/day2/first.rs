@@ -43,22 +43,34 @@ use std::collections::HashMap;
 
 pub fn run(input: &Vec<String>) -> usize
 {
+    // First we initialize two counters; one for words that have 2 repeating characters,
+    // one for words that have 3 repeating characters.
     let mut two_count: usize = 0;
     let mut three_count: usize = 0;
 
-    for line in input
+    for word in input
         {
-            let mut char_to_count: HashMap<char, usize> = HashMap::with_capacity(line.len());
+            // char_to_count will map each character to the number of its occurences in the word.
+            let mut char_to_count: HashMap<char, usize> = HashMap::with_capacity(word.len());
 
-            for letter in line.chars()
+            // We iterate through each letter of the word we're looking at through chars().
+            for letter in word.chars()
                 {
-                    let counter = char_to_count.entry(letter).or_insert(0);
-                    *counter += 1;
+                    // We initialize a reference to the entry letter, or if it doesn't exist,
+                    // we first insert 0 at its place, then fetch it.
+                    let letter_count = char_to_count.entry(letter).or_insert(0);
+
+                    // We increase the letter count by one. Since we did it through a reference,
+                    // it's like we updated the value.
+                    *letter_count += 1;
                 }
 
+            // Since we only want to count if at least 1 character appeared twice or thrice,
+            // we'll use booleans to flag whether or not it happened.
             let mut flag2 = false;
             let mut flag3 = false;
 
+            // We'll then go through all the values, and if the conditions meet, we turn the flags.
             for entry in char_to_count.values()
                 {
                     if *entry == 2usize    { flag2 = true; }
@@ -69,5 +81,7 @@ pub fn run(input: &Vec<String>) -> usize
             if flag3    { three_count += 1; }
         }
 
+    // Finally, our checksum is the sum of words with at least 2 repeating letters and 3 repeating letters.
+    // So, we return the sum of the variables which counter how many such words exist.
     return two_count * three_count;
 }

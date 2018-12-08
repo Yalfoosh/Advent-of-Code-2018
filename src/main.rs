@@ -13,6 +13,7 @@ fn main()
 {
     loop
     {
+        // Assign a variable for our input; it's a simply string.
         let mut input = String::new();
 
         println!("{}", global::MAIN_DAY_MESSAGE);
@@ -23,14 +24,18 @@ fn main()
                 Err(_) => println!("{}", global::MAIN_INVALID_INPUT_MESSAGE)
             }
 
+        //Trimming input because whitespaces are a nuisance.
         let input = input.trim();
 
         match input
             {
+                //exit will simply exit the process with code 0.
                 "exit" => { process::exit(0); }
                 _ => ()
             }
 
+        //If our input wasn't matched above, assume the user is entering the day number they
+        //want to load. We're parsing it to usize.
         match input.parse::<usize>()
             {
                 Ok(day) => match day
@@ -40,6 +45,7 @@ fn main()
                         2 => { D2task::main() },
                         x => println!("{} ({})\n\n", global::MAIN_DAY_NOT_IMPLEMENTED_MESSAGE, x)
                     }
+                //This triggers if the user entered something that wasn't a N+ number.
                 Err(_) => println!("{}", global::MAIN_POSITIVE_NUMBER_NEEDED_MESSAGE)
             }
     }

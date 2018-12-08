@@ -34,7 +34,11 @@ use std::collections::HashSet;
 pub fn run(starting_frequency: i32, input: &Vec<i32>) -> i32
 {
     let mut frequency = starting_frequency;
+
+    // We initialize a HashSet of i32's in which we'll put all the frequencies we've read previously.
     let mut visited_frequencies: HashSet<i32> = HashSet::new();
+
+    // done acts as a switch that will break the infinite loop of reading frequencies.
     let mut done = false;
 
     while !done

@@ -6,7 +6,7 @@ use super::second;
 
 pub fn main()
 {
-    let input = get_input_vector();
+    let input = get_input_vector(Global::DAY2_INPUT_PATH);
 
     run_first(&input);
     run_second(&input);
@@ -14,9 +14,9 @@ pub fn main()
     println!("\n");
 }
 
-fn get_input_vector() -> Vec<String>
+fn get_input_vector(path: &str) -> Vec<String>
 {
-    let read_lines = match fs::read_to_string(Global::DAY2_INPUT_PATH)
+    let input = match fs::read_to_string(path)
         {
             Ok(value) => value,
             Err(_) =>
@@ -29,9 +29,10 @@ fn get_input_vector() -> Vec<String>
                 }
         };
 
+    // Every line in our input is going to be a new String we'll be looking at.
     let mut input_vector: Vec<String> = Vec::new();
 
-    for line in read_lines.lines() { input_vector.push(line.to_string()); }
+    for line in input.lines() { input_vector.push(line.to_string()); }
 
     return input_vector
 }

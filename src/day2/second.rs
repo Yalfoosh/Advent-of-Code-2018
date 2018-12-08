@@ -37,6 +37,19 @@ pub fn run(input: &Vec<String>) -> String
     return identical_boxes_without_difference[0..identical_boxes_without_difference.len() - 1].to_string();
 }
 
+/// Determines whether or not the first string has at most 1 different character than the second string
+///
+/// # Examples
+///
+/// ```
+/// let first = "abcde";
+/// let second = "absde";
+/// let third = "abcba";
+///
+/// assert_eq!(second::are_identical(first, first), true);
+/// assert_eq!(second::are_identical(first, second), true);
+/// assert_eq!(second::are_identical(first, third), false);
+/// ```
 fn are_identical(first: &str, second: &str) -> bool
 {
     let mut found_difference = false;
@@ -56,6 +69,7 @@ fn are_identical(first: &str, second: &str) -> bool
     return true;
 }
 
+/// Returns a HashSet of String tuples containing identical pairs (determined by are_identical())
 fn get_identical(codes: &Vec<String>) -> HashSet<(String, String)>
 {
     let mut matches: HashSet<(String, String)> = HashSet::new();
@@ -77,6 +91,19 @@ fn get_identical(codes: &Vec<String>) -> HashSet<(String, String)>
     return matches;
 }
 
+/// Returns a new string which remove the first difference occurrence between first and second from first.
+///
+/// # Examples
+///
+/// ```
+/// let first = "abcde";
+/// let second = "absde";
+/// let third = "abcba";
+///
+/// assert_eq!(second::fix_first_difference(first, first), first);
+/// assert_eq!(second::fix_first_difference(first, second), "abde");
+/// assert_eq!(second::fix_first_difference(first, third), "abde");
+/// ```
 fn fix_first_difference(first: &str, second: &str) -> String
 {
     for (index, character) in first.chars().enumerate()

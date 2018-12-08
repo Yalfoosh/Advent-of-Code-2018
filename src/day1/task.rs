@@ -6,7 +6,7 @@ use super::second;
 
 pub fn main()
 {
-    let input = get_input_vector();
+    let input = get_input_vector(Global::DAY1_INPUT_PATH);
 
     run_first(Global::DAY1_STARTING_FREQUENCY, &input);
     run_second(Global::DAY1_STARTING_FREQUENCY, &input);
@@ -14,9 +14,10 @@ pub fn main()
     println!("\n");
 }
 
-fn get_input_vector() -> Vec<i32>
+fn get_input_vector(path: &str) -> Vec<i32>
 {
-    let read_lines = match fs::read_to_string(Global::DAY1_INPUT_PATH)
+    // First, we read the things located in path.
+    let input = match fs::read_to_string(path)
         {
             Ok(value) => value,
             Err(_) =>
@@ -29,10 +30,14 @@ fn get_input_vector() -> Vec<i32>
                 }
         };
 
+    // Once we have successfully read from the file, we're creating a Vector containing i32's
+    // which will contains the numbers we read.
     let mut input_vector: Vec<i32> = Vec::new();
 
-    for line in read_lines.lines()
+    for line in input.lines()
         {
+            // We'll assume we're parsing i32's. We could parse isize, but we already know that
+            // there will be at most i32's in input, plus it's better performance-wise.
             match line.parse::<i32>()
                 {
                     Ok(value) => input_vector.push(value),

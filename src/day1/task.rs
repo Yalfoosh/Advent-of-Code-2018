@@ -36,11 +36,11 @@ fn get_input_vector() -> Vec<i32>
             match line.parse::<i32>()
                 {
                     Ok(value) => input_vector.push(value),
-                    Err(_) => { println!("{}", Global::SOME_NUMBER_IS_INVALID); }
+                    Err(_) => { println!("{}", Global::SOME_NUMBER_IS_INVALID_MESSAGE); }
                 }
         }
 
-    input_vector
+    return input_vector;
 }
 
 fn run_first(starting_frequency: i32, input: &Vec<i32>)

@@ -7,6 +7,18 @@ This year, I've decided to focus doing the Advent of Code tasks in Rust. Rust is
 
 Even if Rust turns out to be a fluke, I still hope this AoC will be a worthy experience.
 
+# Usage
+
+After you compile this project, you can use it in the following way:
+
+In the folder where your compiled binary exists, add folders for each day's input named with this pattern: "day#", where # is the day. For an example, a folder containing the input for day 15 would be named "day15".
+
+In it, unless specified below, should be a file containing your input named "input.txt". If the executable doesn't find the input.txt in the folder it's supposed to be for the day specified, it will simply crash.
+
+## Specific format for input folder:
+
+ - None so far.
+
 # ToS
 
 All code in this repository can be used as long as you contact me first. I am not responsible for any kind of damage caused by using my code in any way, however.

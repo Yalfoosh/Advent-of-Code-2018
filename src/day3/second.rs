@@ -17,9 +17,9 @@ pub fn run(input: &Vec<(usize, usize, usize, usize)>, map: &HashMap<usize, HashM
     // This looks for its first occurence.
     // If it wasn't like that, we'd be returning Result<Vec<usize>>, String>, adjusted accordingly.
     for (i, order) in input.iter().enumerate()
-        {
-            if is_order_taken_once(order, map) { return Ok(i + 1); }
-        }
+    {
+        if is_order_taken_once(order, map) { return Ok(i + 1); }
+    }
 
     return Err(Global::DAY3_ORDER_NOT_FOUND_ERROR.to_string());
 }
@@ -28,23 +28,23 @@ pub fn run(input: &Vec<(usize, usize, usize, usize)>, map: &HashMap<usize, HashM
 fn is_order_taken_once(order: &(usize, usize, usize, usize), map: &HashMap<usize, HashMap<usize, usize>>) -> bool
 {
     for x in 0..order.2
+    {
+        match map.get(&(order.0 + x))
         {
-            match map.get(&(order.0 + x))
+            Some(value) =>
+            {
+                for y in 0..order.3
                 {
-                    Some(value) =>
-                        {
-                            for y in 0..order.3
-                                {
-                                    match value.get(&(order.1 + y))
-                                    {
-                                        Some(value2) => if *value2 != 1usize { return false; }
-                                        None => { continue; }
-                                    }
-                                }
-                        }
-                    None => { continue; }
+                    match value.get(&(order.1 + y))
+                    {
+                        Some(value2) => if *value2 != 1usize { return false; }
+                        None => { continue; }
+                    }
                 }
+            }
+            None => { continue; }
         }
+    }
 
     return true;
 }

@@ -17,17 +17,17 @@ pub fn main()
 fn get_input_vector(path: &str) -> Vec<String>
 {
     let input = match fs::read_to_string(path)
+    {
+        Ok(value) => value,
+        Err(_) =>
         {
-            Ok(value) => value,
-            Err(_) =>
-                {
-                    match fs::read_to_string(path.replace("src/", "./"))
-                        {
-                            Ok(value) => value,
-                            Err(_) => panic!(Global::FILE_NOT_FOUND_PANIC_MESSAGE)
-                        }
-                }
-        };
+            match fs::read_to_string(path.replace("src/", "./"))
+            {
+                Ok(value) => value,
+                Err(_) => panic!(Global::FILE_NOT_FOUND_PANIC_MESSAGE)
+            }
+        }
+    };
 
     // Every line in our input is going to be a new String we'll be looking at.
     let mut input_vector: Vec<String> = Vec::new();

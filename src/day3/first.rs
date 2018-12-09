@@ -71,22 +71,22 @@ fn claim_fabric(map: HashMap<usize, HashMap<usize, usize>>, order: &(usize, usiz
 
     // For every square inch of width...
     for x in 0..order.2
+    {
+        // We find the entry for that x coordinate + the current portion of width we're at,
+        // or if it doesn't exist, we insert a new HashMap for it.
+        let x_coordinated = modifying.entry(order.0 + x).or_insert(HashMap::new());
+
+        // For every square inch of height...
+        for y in 0..order.3
         {
-            // We find the entry for that x coordinate + the current portion of width we're at,
-            // or if it doesn't exist, we insert a new HashMap for it.
-            let x_coordinated = modifying.entry(order.0 + x).or_insert(HashMap::new());
+            // We find the entry for that y coordinate + the current portion of height we're at,
+            // or if it doesn't exist, we insert a new usize in it, with value 0.
+            let fully_coordinated = (*x_coordinated).entry(order.1 + y).or_insert(0);
 
-            // For every square inch of height...
-            for y in 0..order.3
-                {
-                    // We find the entry for that y coordinate + the current portion of height we're at,
-                    // or if it doesn't exist, we insert a new usize in it, with value 0.
-                    let fully_coordinated = (*x_coordinated).entry(order.1 + y).or_insert(0);
-
-                    // Adding 1 to the HashMap entry is like claiming the square inch.
-                    *fully_coordinated += 1;
-                }
+            // Adding 1 to the HashMap entry is like claiming the square inch.
+            *fully_coordinated += 1;
         }
+    }
 
     // Finally, we return the modified HashMap and give ownership to the caller.
     return modifying;
@@ -99,12 +99,12 @@ fn count_multiple_claims(map: &HashMap<usize, HashMap<usize, usize>>) -> usize
     let mut count = 0usize;
 
     for x_coordinated in map.values()
+    {
+        for fully_coordinated in x_coordinated.values()
         {
-            for fully_coordinated in x_coordinated.values()
-                {
-                    if *fully_coordinated != 1usize { count += 1; }
-                }
+            if *fully_coordinated != 1usize { count += 1; }
         }
+    }
 
     return count;
 }

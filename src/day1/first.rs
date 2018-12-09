@@ -29,10 +29,7 @@ pub fn run(starting_frequency: i32, input: &Vec<i32>) -> i32
 {
     let mut frequency = starting_frequency;
 
-    for value in input
-        {
-            frequency += value
-        }
+    for value in input { frequency += value; }
 
     return frequency;
 }
